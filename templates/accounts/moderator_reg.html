@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Registration</title>
+    <link rel="stylesheet" href="{% static 'styles/moderator_reg.css' %}">
+</head>
+<body>
+    <div class="registration-container">
+        <h2>Admin Registration</h2>
+        <form action="{% url 'moderator_reg' %}" method="POST">
+            {% csrf_token %}
+            <div class="input-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="input-group">
+                <label for="confirm_password">Confirm Password:</label>
+                <input type="password" id="confirm_password" name="confirm_password" required>
+            </div>
+            <div class="input-group">
+                <label for="token">Admin Token:</label>
+                <input type="text" id="token" name="token" required>
+            </div>
+            <button type="submit">Register</button>
+        </form>
+        {% for message in messages %}
+        <h4 style="color: blue; text-align: center; padding:12px; border:2px; border-radius:4px;">{{message}}</h4>
+        {% endfor %}
+    </div>
+</body>
+</html>

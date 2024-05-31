@@ -1,0 +1,35 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Unilorin Computer Engineering final year project'24</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'styles/index.css' %}">
+</head>
+<body>
+  
+<div class="main-div">
+  <div class="box-1">
+    <div class="header-div">
+    <h1>Welcome to the UilCpe Surveillance System Project </h1>
+    </div>
+  
+    <div class="all-btn">
+      <a href="{% url 'moderator_reg' %}" id="second">Admin Register</a>
+      <a href="{% url 'moderator_login' %}" id="first">Admin Login</a>
+      <a href="{% url 'visitor_reg' %}" id="fourth" >Guest Register</a>
+      <a href="{% url 'visitor_login' %}" id="third">Guest Login</a>
+    </div>
+  </div>
+
+  <div class="box2">
+    <img src ="{% static 'images/image.jpg' %}" alt="image for the hero section is here "></img>
+  </div>
+
+</div>
+
+</body>

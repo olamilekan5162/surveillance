@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ADMIN DASHBOARD</title>
+</head>
+<body>
+{% if user.is_authenticated %}
+    {% if is_moderator %} 
+        <h1>Admin Dashboard</h1>
+        <h2>welcome {{user.username}}</h2>
+        <h2>welcome {{voter.user.username}}</h2>
+        <a href="{% url 'moderator_logout' %}">Logout</a>
+        <h1>VIDEO LIVE STREAM</h1>
+        <div>
+            <h2>Camera Stream</h2>
+            <img src="{% url 'webcam' %}" width="640" height="480" alt="feeds">
+        </div>
+        <div>
+            <h2>Past Recordings</h2>
+            <ul>
+                {% for recording in recordings %}
+                    <li>
+                        <a href="{% url 'play_recording' recording.id %}">{{ recording.timestamp }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <ul>
+            {% for visitors in visitor %}
+            <li>
+                
+                {% if visitors.is_authorized %}
+                    <p>{{visitors.user.username}} is authorize</p>
+                {% else %}
+                    <p>{{visitors.user.username}} is unauthorize
+                {% endif %}
+                    
+                <form action="{% url 'authorize' visitors.id %}" method="POST">
+                    {% csrf_token %}
+                    <button type="submit">authorize</button>
+                </form>
+
+                <form action="{% url 'unauthorize' visitors.id %}" method="POST">
+                    {% csrf_token %}
+                    <button type="submit">unauthorize</button>
+                </form>
+
+            </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <h1>You are not authorized to view this page</h1>
+        <a href="{% url 'index' %}">Back to Homepage</a>
+    {% endif %}
+{% else %}
+    <h1>You must log in first to view this page</h1>
+    <a href="{% url 'index' %}">Back to Homepage</a>
+{% endif %}
+</body>
+</html>

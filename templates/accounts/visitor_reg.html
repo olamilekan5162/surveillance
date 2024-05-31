@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guest Registration</title>
+    <link rel="stylesheet" href="{% static 'styles/visitor_reg.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="registration-container">
+        <h2>Guest Registration</h2>
+        <form action="{% url 'visitor_reg' %}" method="POST">
+            {% csrf_token %}
+            <div class="input-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="input-group">
+                <label for="confirm_password">Confirm Password:</label>
+                <input type="password" id="confirm_password" name="confirm_password" required>
+            </div>
+            <div class="btn-div">
+                <!-- <button type="" id="btn-child" action="{% url 'visitor_login' %}" method="GET">Login</button> -->
+                <button type="submit">Register</button>
+
+            <span>Do you have an account already? <a href ="{%  url 'visitor_login' %}"> Login </a></span>
+        </div>
+        </form>
+        {% for message in messages %}
+        <h4 style="color: blue; text-align: center; padding:12px; border:2px; border-radius:4px;">{{message}}</h4>
+        {% endfor %}
+    </div>
+</body>
+</html>

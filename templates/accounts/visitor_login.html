@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guest Login</title>
+    <link rel="stylesheet" href="{% static 'styles/visitor_login.css' %}">
+</head>
+<body>
+    <div class="login-container">
+        <div class="box-1">
+        <h2>Guest Login</h2>
+        <form action="{% url 'visitor_login' %}" method="POST" class="form-div">
+            {% csrf_token %}
+            <div class="input-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="btn-div">
+            <button type="submit" >Login</button>
+            <span>Create your guest account  <a href ="{%  url 'visitor_reg' %}"> Here</a> </span>
+        </div>
+        </form>
+        {% for message in messages %}
+        <h4 style="color: blue; text-align: center; padding:12px; border:2px; border-radius:4px;">{{message}}</h4>
+        {% endfor %}
+
+    </div>
+    <div class="box2">
+        <img src ="{% static 'images/imaged.jpg' %}" alt="image for the login section is here "></img>
+    </div>
+    </div>
+</body>
+</html>
