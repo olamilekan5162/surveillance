@@ -7,25 +7,24 @@
   <title>Document</title>
   <link rel="stylesheet" href="{% static 'styles/moderator_login.css' %}">
 </head>
-{% if user.is_authenticated %}
+<body>
+  <div class="guest">
+    <h1>Guest Dashboard </h1>
+    <h2>welcome {{user.username}}</h2>
+    <a href="{% url 'visitor_logout' %}">Logout</a>
+    <h1>VIDEO LIVE STREAM</h1>
+      <div>
+        <h2>Camera Stream</h2>
+        <img src="{% url 'webcam' %}" width="640" height="480" alt="feeds">
+      </div>
+  </div>
+</body>
+<!--
   <body>
     <div class="guest">
-      <h1>Guest Dashboard </h1>
-      <h2>welcome {{user.username}}</h2>
-      <a href="{% url 'visitor_logout' %}">Logout</a>
-      <h1>VIDEO LIVE STREAM</h1>
-        <div>
-          <h2>Camera Stream</h2>
-          <img src="{% url 'webcam' %}" width="640" height="480" alt="feeds">
-        </div>
+      <h1>You must log in first to view this page</h1>
+      <a href="{% url 'index' %}">Back to Homepage</a>
     </div>
   </body>
-  {% else %}
-    <body>
-      <div class="guest">
-        <h1>You must log in first to view this page</h1>
-        <a href="{% url 'index' %}">Back to Homepage</a>
-      </div>
-    </body>
-{% endif %}
+ -->
 </html>

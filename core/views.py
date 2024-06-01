@@ -4,6 +4,7 @@ from django.http.response import StreamingHttpResponse, HttpResponse
 from . models import *
 from accounts.models import Visitor, Moderator
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 import os
 
 camera = IpWebCam("http://192.168.112.205:8080/shot.jpg")
@@ -12,19 +13,30 @@ camera = IpWebCam("http://192.168.112.205:8080/shot.jpg")
 def index(request):
     return render(request, 'core/index.html')
 
-def moderator_dashboard(request):
-    user = request.user
-    if Moderator.objects.filter(user=user).exists():
-        is_moderator = True
-    else:
-        is_moderator = False
 
-    recordings = Recording.objects.all()
-    visitor = Visitor.objects.all()
-    return render(request, 'core/moderator_dashboard.html', {'recordings': recordings, 'visitor': visitor, 'is_moderator': is_moderator})
+def moderator_dashboard(request):
+        
+        user = request.user    
+        recordings = Recording.objects.all()
+        visitor = Visitor.objects.all()
+        if user.is_authenticated:
+            is_moderator = Moderator.objects.filter(user=user).exists()
+
+            context = {'recordings': recordings,
+                       'visitor': visitor, 
+                       'is_moderator': is_moderator
+                       }
+            return render(request, 'core/moderator_dashboard.html', context)
+        else:
+            return HttpResponse('Your must log in first to view this page <br> <a href="/">Go Back</a>')
+
     
 def visitor_dashboard(request):
-    return render(request, 'core/visitor_dashboard.html')
+    user = request.user
+    if user.is_authenticated:
+        return render(request, 'core/visitor_dashboard.html')
+    else:
+        return HttpResponse('Your must log in first to view this page <br> <a href="/">Go Back</a>')
 
 def gen(cam):
    while True:
