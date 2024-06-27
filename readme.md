@@ -16,7 +16,7 @@ Welcome to the Web-Based Integrated Surveillance System project! This project ai
 ## Installation
 1. Clone the repository to your local machine:
    ```
-   git clone <repository-url>
+   git clone https://github.com/olamilekan5162/surveillance.git
    ```
 2. Navigate to the project directory:
    ```

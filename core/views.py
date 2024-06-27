@@ -3,11 +3,12 @@ from core.cam import *
 from django.http.response import StreamingHttpResponse, HttpResponse
 from . models import *
 from accounts.models import Visitor, Moderator
+from motion.models import DeviceState
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 import os
 
-camera = IpWebCam("http://192.168.112.205:8080/shot.jpg")
+camera = IpWebCam("http://192.168.37.35:8080/shot.jpg")
 
 # Create your views here.
 def index(request):
@@ -19,11 +20,14 @@ def moderator_dashboard(request):
         user = request.user    
         recordings = Recording.objects.all()
         visitor = Visitor.objects.all()
+        devices = DeviceState.objects.all()
+
         if user.is_authenticated:
             is_moderator = Moderator.objects.filter(user=user).exists()
 
             context = {'recordings': recordings,
                        'visitor': visitor, 
+                       'devices': devices,
                        'is_moderator': is_moderator
                        }
             return render(request, 'core/moderator_dashboard.html', context)
