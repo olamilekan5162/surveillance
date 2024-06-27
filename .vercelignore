@@ -1,0 +1,10 @@
+# .vercelignore
+.git/
+__pycache__/
+*.pyc
+env/
+node_modules/
+build/
+dist/
+tests/
+static/
