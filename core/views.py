@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 import os
 
-# camera = IpWebCam("http://192.168.37.35:8080/shot.jpg")
+camera = IpWebCam("http://192.168.37.35:8080/shot.jpg")
 
 # Create your views here.
 def index(request):
@@ -42,15 +42,15 @@ def visitor_dashboard(request):
     else:
         return HttpResponse('Your must log in first to view this page <br> <a href="/">Go Back</a>')
 
-# def gen(cam):
-#    while True:
-#       frame = cam.get_frame()
-#       yield (b'--frame\r\n'
-#              b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
+def gen(cam):
+   while True:
+      frame = cam.get_frame()
+      yield (b'--frame\r\n'
+             b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
       
-# def webcam(request):
-#    return StreamingHttpResponse(gen(camera),
-#                                 content_type='multipart/x-mixed-replace; boundary=frame')
+def webcam(request):
+   return StreamingHttpResponse(gen(camera),
+                                content_type='multipart/x-mixed-replace; boundary=frame')
 
 # def start_recording(request):
 #     camera.start_recording()
