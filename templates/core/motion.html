@@ -21,15 +21,14 @@
 </head>
 <body onload="fetchStatus()">
     <h1>ESP32 Control Panel</h1>
-
     <div>
         <h2>Alarm 1</h2>
         <p>Status: <span id="alarm1-status">Unknown</span></p>
-        <form action="/toggle/alarm1/on/" method="post">
+        <form action="{% url 'toggle_device' device_name='alarm1' action='on' %}" method="post">
             {% csrf_token %}
             <button type="submit">Turn On</button>
         </form>
-        <form action="/toggle/alarm1/off/" method="post">
+        <form action="{% url 'toggle_device' device_name='alarm1' action='off' %}" method="post">
             {% csrf_token %}
             <button type="submit">Turn Off</button>
         </form>
@@ -38,11 +37,11 @@
     <div>
         <h2>Alarm 2</h2>
         <p>Status: <span id="alarm2-status">Unknown</span></p>
-        <form action="/toggle/alarm2/on/" method="post">
+        <form action="{% url 'toggle_device' device_name='alarm2' action='on' %}" method="post">
             {% csrf_token %}
             <button type="submit">Turn On</button>
         </form>
-        <form action="/toggle/alarm2/off/" method="post">
+        <form action="{% url 'toggle_device' device_name='alarm2' action='off' %}" method="post">
             {% csrf_token %}
             <button type="submit">Turn Off</button>
         </form>

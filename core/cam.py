@@ -13,8 +13,12 @@ class IpWebCam(object):
         self.is_recording = False
         self.out = None
         self.recording_thread = None
+        self.frame = None
+        self.lock = threading.Lock()
+        self.fetch_thread = threading.Thread(target=self.update_frame, args=())
+        self.fetch_thread.daemon = True
+        self.fetch_thread.start()
         self.start_recording()
-
 
     def __del__(self):
         cv2.destroyAllWindows()
@@ -41,17 +45,29 @@ class IpWebCam(object):
         # recording.save()
         # self.start_recording()
 
+    def update_frame(self):
+        cap = cv2.VideoCapture(self.url)
+        while True:
+            ret, img = cap.read()
+            if ret:
+                with self.lock:
+                    self.frame = cv2.resize(img, (640, 480), interpolation=cv2.INTER_LINEAR)
+            else:
+                cap.release()
+                cap = cv2.VideoCapture(self.url)
+
     def get_frame(self):
-        imgResp = urllib.request.urlopen(self.url)
-        imgNp = np.array(bytearray(imgResp.read()), dtype=np.uint8)
-        img = cv2.imdecode(imgNp, 1)
+        cap = cv2.VideoCapture(self.url)
+        ret, img = cap.read()
+        cap.release()
+        if not ret:
+            return None
         resize = cv2.resize(img, (640, 480), interpolation=cv2.INTER_LINEAR)
-        frame_flip = cv2.flip(resize, 1)
 
         if self.is_recording and self.out is not None:
-            self.out.write(frame_flip)
+            self.out.write(resize)
 
-        ret, jpeg = cv2.imencode('.jpg', frame_flip)
+        ret, jpeg = cv2.imencode('.jpg', resize)
         return jpeg.tobytes()
     
     def schedule_stop(self):
