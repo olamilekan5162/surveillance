@@ -47,7 +47,9 @@ INSTALLED_APPS = [
     "core",
     "accounts",
     "motion",
+
 ]
+
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",

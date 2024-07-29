@@ -73,14 +73,14 @@ def play_recording(request, recording_id):
     
 def authorize(request, pk):
     visitor = Visitor.objects.get(id=pk)
-    if request.method == 'POST':
-        visitor.is_authorized = True
-        visitor.save()
-        return redirect(moderator_dashboard)
+    # if request.method == 'POST':
+    visitor.is_authorized = True
+    visitor.save()
+    return redirect(moderator_dashboard)
 
 def unauthorize(request, pk):
     visitor = Visitor.objects.get(id=pk)
-    if request.method == 'POST':
-        visitor.is_authorized = False
-        visitor.save()
-        return redirect(moderator_dashboard)
+    # if request.method == 'POST':
+    visitor.is_authorized = False
+    visitor.save()
+    return redirect(moderator_dashboard)

@@ -1,5 +1,6 @@
-{% load static %}
 
+{% load static %}
+{% comment %} {% load static tailwind_tags %} {% endcomment %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,28 +9,323 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'styles/index.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+    {% comment %} {% tailwind_css %} {% endcomment %}
+    <style>
+      body {
+        font-family: 'Roboto', sans-serif;
+      }
+      .hidden { display: none; }
+      .block { display: block; }
+      .container { max-width: fit-content; }
+
+      nav {
+        display: flex;
+        background-color: #f8fafc;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+        align-items: center;
+        justify-content: space-between;
+        height: auto;
+        width: 100%;
+      }
+      .logo-container {
+        text-align: center;
+        padding: 16px 24px;
+      }
+      .logo-container h1 {
+        font-size: 30px;
+        font-weight: bold;
+        color: ;
+        letter-spacing: 0.5px;
+      }
+      /* Mobile responsiveness */
+      @media (max-width: 768px) {
+        .logo-container {
+          padding: 12px 16px; /* Adjust padding for smaller screens */
+        }
+      
+        .logo-container h1 {
+          font-size: 24px; /* Decrease font size for smaller screens */
+        }
+      }
+      
+      @media (max-width: 480px) {
+        .logo-container {
+          padding: 8px 12px; /* Further adjust padding for very small screens */
+        }
+      
+        .logo-container h1 {
+          font-size: 20px; /* Further decrease font size for very small screens */
+        }
+      }
+
+      .navitems {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .navitems ul {
+        display: flex;
+        flex-direction: row;
+        padding: 24px;
+        justify-content: center;
+        align-items: center;
+        margin-right: 24px;
+        height: 40px;
+        width: auto;
+        font-weight: bold;
+
+        list-style-type: none;
+      }
+      .navitems ul li a {
+        padding: 16px;
+        text-decoration: none;
+        color:white;
+        background-color: blue;
+        border-radius: 30px;
+      display: inline-block;
+      justify:space-around;
+     
+      }
+      .btn-1{
+        margin-left:10px;
+        margin-right:20px;
+      }
+      .navitems ul li a:hover {
+        color: #fff;
+        background-color: #1E90FF;
+      }
+   
+      .landing-container {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 16px;
+        background-color: #1e40af;
+      }
+      @media (min-width: 768px) {
+        .landing-container {
+          grid-template-columns: 1fr 1fr;
+        }
+       
+
+      }
+      .box-1 {
+        background-color: #f1f5f9;
+        height: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        border-radius: 4px;
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 8px;
+      }
+      @media (min-width: 768px) {
+        .box-1 {
+          height: 100vh;
+          border-radius: 4px;
+        }
+      }
+      .landing-text {
+        display: flex;
+        align-items: center;
+        justify-content:space-between;
+        text-align: center;
+        flex-direction: column;
+        padding: 1px;
+      }
+      @media (min-width: 768px) {
+        .landing-text {
+          padding: 0;
+        }
+      }
+      .landing-text h1 {
+        font-size: 30px;
+        padding: 8px;
+        font-weight: bold;
+        animation-delay: 2s;
+        animation-duration: 3s;
+      }
+      @media (min-width: 768px) {
+        .landing-text h1 {
+          font-size: 50px;
+        }
+      }
+      .landing-text p {
+        padding: 12px;
+        font-size: 18px;
+        font-weight: normal;
+        
+      }
+      @media (min-width: 768px) {
+        .landing-text p {
+          font-size: 24px;
+        }
+      }
+      .landing-text .cta-button {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        margin-bottom:16px;
+      }
+      .landing-text .cta-button a {
+        background-color: #1e40af;
+        color: white;
+        font-weight: bold;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        border-radius: 99px;
+        padding: 12px 32px;
+        margin: 24px;
+        font-size: 16px;
+        text-decoration: none;
+      }
+      @media (min-width: 768px) {
+        .landing-text .cta-button a {
+          font-size: 18px;
+        }
+      }
+      .landing-text .cta-button a:hover {
+        background-color: #3b82f6;
+      }
+      .box-2 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-top: 20px;
+        
+      }
+      @media (min-width: 768px) {
+        .box-2 {
+          padding-top: 0;
+          display: inline-block;
+        }
+      }
+      .about-section {
+        background-color: white;
+        height: 100vh;
+      }
+      @media (min-width: 640px) {
+        .about-section {
+          height: auto;
+        }
+      }
+      .about-title {
+        font-size: 40px;
+        font-weight: bold;
+        text-align: center;
+        margin-top: 28px;
+        animation-delay: 2s;
+        animation-duration: 3s;
+      }
+      .about-container {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        height: auto;
+      }
+      .about-image {
+        width: 100%;
+        border-radius: 16px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        margin-left: 24px;
+      }
+      .about-text {
+        text-align: right;
+        display: flex;
+        align-items: start;
+        flex-wrap: wrap;
+        line-height: 40px;
+        margin: 24px;
+        padding: 24px;
+        font-size: 20px;
+      }
+      button{
+        
+      }
+    </style>
 </head>
 <body>
-  
-<div class="main-div">
-  <div class="box-1">
-    <div class="header-div">
-    <h1>Welcome to the UilCpe Surveillance System Project </h1>
+  <div class="container  max-w-fit" >
+
+    {% comment %} this is the first section for the landing page  {% endcomment %}
+    <section class="  ">
+        <nav class=" ">
+            <div class="logo-container">
+              <h1 class="text-3xl">Surveillance</h1>
+              </div>
+
+              <div class="navitems  ">
+                <ul class=""> 
+                  <li><a href="{% url 'moderator_reg' %}" class =" btn-1 p-3 hover:text-gray-200 hover:bg-blue-400 text-white md:h-6 md:w-24  md:mr-8 ml-4 rounded-full px-8 py-4 bg-blue-600 text-center">Admin Reg </a></li> 
+                  <li><a href="{% url 'moderator_login' %}" class ="p-3 hover:text-gray-200 hover:bg-blue-400 text-white md:h-6 md:w-24  md:mr-4 ml-2 rounded-full px-8 py-4 bg-blue-600 text-center">Admin Login</a></li>
+               </ul>
+       
+                {% comment %} menu for mobile  {% endcomment %}
+                <div class=" m-6  hidden ">
+               
+              </div>
+      
+      
+                </div>
+           </nav> 
+        
+   {% comment %} main page  {% endcomment %}
+
+     <main class="landing-container ">
+      <div class="box-1">
+          <div class="landing-text ">
+              <h1 data-aos="zoom-in" class=" animate__animated" style="animation-delay: 2s; animation-duration: 3s; ">Surveillance, a University of Ilorin CPE Project</h1>
+              <p class="">
+                  Surveillance is a web application that allows you to track your workplace and ensure a report of every activity.
+              </p>
+              <div class="cta-button">
+                  <span class="">
+                      <a href="{% url 'visitor_reg' %}" class="">Get Started</a>
+                  </span>
+                  <span class="">
+                      <a href="{% url 'visitor_login' %}">Login</a>
+                  </span>
+              </div>
+          </div>
+      </div>
+      <div class="box-2 ">
+          <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>
+          <dotlottie-player src="https://lottie.host/9eda9868-11fc-4dd9-9b9d-edc6d504391e/HtUw0cR04o.json" background="transparent" speed="0.5" style="width: 100%; height: auto; padding: 6px" loop autoplay control></dotlottie-player>
+      </div>
+      {% comment %} div for mobile view {% endcomment %}
+      <div class="sm:hidden block">
+          <!-- Image for mobile view can be included here if needed -->
+      </div>
+
+
+     
+  </main>
+{% comment %}   
+  <section id="about" class="bg-white h-screen sm:h-full ">
+   
+    {% comment %} div for the about section start here  {% endcomment %}
+    {% comment %} <h1 data-aos="fade-up"  class=" font-bold  text-center text-5xl mt-10" style="animation-delay: 2s; animation-duration: 3s;  margin-top:28px;">  About Us  </h1>
+    <div class=" w-screen h-fit flex flex-row ">
+      <div data-aos="zoom-in"  class="h-100% w-screen  animate__animated font-bold  text-center text-5xl mt-10" style="animation-delay: 2s; animation-duration: 4s;  margin-top:28px;"> 
+        <div class="relative z-10">
+          <img src="{% static 'images/surve.jpeg' %}" alt="Image 1" class="w-full rounded-2xl shadow-lg ml-6">
+        </div>
+      
+      
+      </div>
+      <div data-aos="zoom-out"  class=" h-48 w-screen animate__animated   text-center mt-10" style="animation-delay: 5s; animation-duration: 4s;  margin-top:28px;"> 
+       <p class="text-right flex items-start text-wrap  leading-10 mx-6 my-6 px-6 py-6" style=" font-size:20px;" > Welcome to our state-of-the-art Surveillance System,an advanced solution designed for optimal security and monitoring.Developed as a final year project under the guidance of Prof. J.A. Opadiji,this system integrates cutting-edge technology to offer remote control and monitoring through a seamless web application. Built with Django, HTML,tailwind CSS, and JavaScript, it allows you to manage your surveillance setup from anywhere.Featuring real-time video livestreams, intuitive button controls for adjusting camera angles and recordings,comprehensive data logs, and precise timestamps, our system ensures you are always aware and in control of your premises.Experience reliable and efficient security with our innovative Surveillance System.</p>
     </div>
+
   
-    <div class="all-btn">
-      <a href="{% url 'moderator_reg' %}" id="second">Admin Register</a>
-      <a href="{% url 'moderator_login' %}" id="first">Admin Login</a>
-      <a href="{% url 'visitor_reg' %}" id="fourth" >Guest Register</a>
-      <a href="{% url 'visitor_login' %}" id="third">Guest Login</a>
-    </div>
+    
+          </section> {% endcomment %} 
+    </section>
   </div>
-
-  <div class="box2">
-    <img src ="{% static 'images/image.jpg' %}" alt="image for the hero section is here "></img>
-  </div>
-
-</div>
-
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
 </body>

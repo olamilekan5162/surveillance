@@ -3,74 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ESP32 Control</title>
-    <script>
-        function fetchStatus() {
-            fetch('/stapytus/')
-                .then(response => response.json())
-                .then(data => {
-                    document.getElementById('alarm1-status').textContent = data.alarm1 ? 'On' : 'Off';
-                    document.getElementById('alarm2-status').textContent = data.alarm2 ? 'On' : 'Off';
-                    document.getElementById('floodlight1-status').textContent = data.floodlight1 ? 'On' : 'Off';
-                    document.getElementById('floodlight2-status').textContent = data.floodlight2 ? 'On' : 'Off';
-                });
-        }
-
-        setInterval(fetchStatus, 5000);
-    </script>
+    <title>Control ESP32 Devices</title>
 </head>
-<body onload="fetchStatus()">
-    <h1>ESP32 Control Panel</h1>
+<body>
+    <h1>Control ESP32 Devices</h1>
+    
     <div>
         <h2>Alarm 1</h2>
-        <p>Status: <span id="alarm1-status">Unknown</span></p>
-        <form action="{% url 'toggle_device' device_name='alarm1' action='on' %}" method="post">
-            {% csrf_token %}
-            <button type="submit">Turn On</button>
-        </form>
-        <form action="{% url 'toggle_device' device_name='alarm1' action='off' %}" method="post">
-            {% csrf_token %}
-            <button type="submit">Turn Off</button>
-        </form>
+        <button onclick="location.href='{% url 'toggle_device' device_name='alarm1' action='on' %}'">Turn Alarm 1 On</button>
+        <button onclick="location.href='{% url 'toggle_device' device_name='alarm1' action='off' %}'">Turn Alarm 1 Off</button>
     </div>
 
     <div>
         <h2>Alarm 2</h2>
-        <p>Status: <span id="alarm2-status">Unknown</span></p>
-        <form action="{% url 'toggle_device' device_name='alarm2' action='on' %}" method="post">
-            {% csrf_token %}
-            <button type="submit">Turn On</button>
-        </form>
-        <form action="{% url 'toggle_device' device_name='alarm2' action='off' %}" method="post">
-            {% csrf_token %}
-            <button type="submit">Turn Off</button>
-        </form>
+        <button onclick="location.href='{% url 'toggle_device' device_name='alarm2' action='on' %}'">Turn Alarm 2 On</button>
+        <button onclick="location.href='{% url 'toggle_device' device_name='alarm2' action='off' %}'">Turn Alarm 2 Off</button>
     </div>
 
     <div>
         <h2>Floodlight 1</h2>
-        <p>Status: <span id="floodlight1-status">Unknown</span></p>
-        <form action="/toggle/floodlight1/on/" method="post">
-            {% csrf_token %}
-            <button type="submit">Turn On</button>
-        </form>
-        <form action="/toggle/floodlight1/off/" method="post">
-            {% csrf_token %}
-            <button type="submit">Turn Off</button>
-        </form>
+        <button onclick="location.href='{% url 'toggle_device' device_name='floodlight1' action='on' %}'">Turn Floodlight 1 On</button>
+        <button onclick="location.href='{% url 'toggle_device' device_name='floodlight1' action='off' %}'">Turn Floodlight 1 Off</button>
     </div>
 
     <div>
         <h2>Floodlight 2</h2>
-        <p>Status: <span id="floodlight2-status">Unknown</span></p>
-        <form action="/toggle/floodlight2/on/" method="post">
-            {% csrf_token %}
-            <button type="submit">Turn On</button>
-        </form>
-        <form action="/toggle/floodlight2/off/" method="post">
-            {% csrf_token %}
-            <button type="submit">Turn Off</button>
-        </form>
+        <button onclick="location.href='{% url 'toggle_device' device_name='floodlight2' action='on' %}'">Turn Floodlight 2 On</button>
+        <button onclick="location.href='{% url 'toggle_device' device_name='floodlight2' action='off' %}'">Turn Floodlight 2 Off</button>
     </div>
 </body>
 </html>
