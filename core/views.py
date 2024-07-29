@@ -8,7 +8,8 @@ from django.contrib.auth.models import User
 import os
 
 # Update the URL with your NVR's stream URL
-camera = IpWebCam("rtsp://admin:surveillance123@192.168.1.176:554/Streaming/Channels/101")
+camera1 = IpWebCam("rtsp://admin:surveillance123@192.168.1.176:554/Streaming/Channels/101")
+camera2 = IpWebCam("rtsp://admin:surveillance123@192.168.1.176:554/Streaming/Channels/201")
 
 def index(request):
     return render(request, 'core/index.html')
@@ -46,17 +47,24 @@ def gen(cam):
         yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
 
-def webcam(request):
-    return StreamingHttpResponse(gen(camera),
+def webcam1(request):
+    return StreamingHttpResponse(gen(camera1),
+                                 content_type='multipart/x-mixed-replace; boundary=frame')
+
+def webcam2(request):
+    return StreamingHttpResponse(gen(camera2),
                                  content_type='multipart/x-mixed-replace; boundary=frame')
 
 # def start_recording(request):
-#     camera.start_recording()
+#     camera1.start_recording()
+#     camera2.start_recording()
 #     return redirect('admin')
 
 # def stop_recording(request):
-#     filepath = camera.stop_recording()
-#     Recording.objects.create(file_path=filepath)
+#     filepath1 = camera1.stop_recording()
+#     filepath2 = camera2.stop_recording()
+#     Recording.objects.create(file_path=filepath1)
+#     Recording.objects.create(file_path=filepath2)
 #     return redirect('admin')
 
 def recordings(request):
@@ -73,14 +81,12 @@ def play_recording(request, recording_id):
     
 def authorize(request, pk):
     visitor = Visitor.objects.get(id=pk)
-    # if request.method == 'POST':
     visitor.is_authorized = True
     visitor.save()
     return redirect(moderator_dashboard)
 
 def unauthorize(request, pk):
     visitor = Visitor.objects.get(id=pk)
-    # if request.method == 'POST':
     visitor.is_authorized = False
     visitor.save()
     return redirect(moderator_dashboard)

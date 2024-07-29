@@ -32,7 +32,7 @@ class IpWebCam(object):
         # filename = now.strftime("%Y%m%d_%H%M%S") + ".avi"
         # self.filepath = os.path.join("recordings", filename)
         # os.makedirs(os.path.dirname(self.filepath), exist_ok=True)
-        # self.out = cv2.VideoWriter(self.filepath, cv2.VideoWriter_fourcc(*'XVID'), 20.0, (640, 480))
+        # self.out = cv2.VideoWriter(self.filepath, cv2.VideoWriter_fourcc(*'XVID'), 20.0, (320, 240))
         # self.schedule_stop()
 
     def stop_recording(self):
@@ -51,7 +51,7 @@ class IpWebCam(object):
             ret, img = cap.read()
             if ret:
                 with self.lock:
-                    self.frame = cv2.resize(img, (640, 480), interpolation=cv2.INTER_LINEAR)
+                    self.frame = cv2.resize(img, (320, 240), interpolation=cv2.INTER_LINEAR)
             else:
                 cap.release()
                 cap = cv2.VideoCapture(self.url)
@@ -62,7 +62,7 @@ class IpWebCam(object):
         cap.release()
         if not ret:
             return None
-        resize = cv2.resize(img, (640, 480), interpolation=cv2.INTER_LINEAR)
+        resize = cv2.resize(img, (320, 240), interpolation=cv2.INTER_LINEAR)
 
         if self.is_recording and self.out is not None:
             self.out.write(resize)
