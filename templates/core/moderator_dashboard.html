@@ -81,7 +81,9 @@
         width:auto !important;
         text-align: center;
         padding-top:0;
+        
        }
+       
 .video-stream-container{
     padding: 10px;
     border: 1px solid;
@@ -103,7 +105,6 @@
     padding: 10px;
     color: #fff;
     background-color: #d9e2ac;
-    justify-content: center;
 }
 
         .video-stream, .recordings-section, .past-recordings, 
@@ -203,7 +204,7 @@
         width: 100px;
         margin: 5px;
     }
-        @media (max-width: 768px) {
+        @media (max-width: 364px) {
             .admin-dashboard {
                 flex-direction: column;
             }
@@ -300,31 +301,31 @@
      <div class="buttton-one"> 
            <p>Alarm1 Control</p>
            <div class=" controls-wrap">
-          <button type="button" > On </button>
-           <button type="button" > Off  </button>
+          <button type="button" onclick="location.href='{% url 'toggle_device' device_name='alarm1' action='on' %}'"> On </button>
+           <button type="button"  onclick="location.href='{% url 'toggle_device' device_name='alarm1' action='off' %}'"> Off  </button>
         </div>
      
     </div>
     <div class="buttton-one"> 
         <p>Alarm2 Control</p>
         <div class=" controls-wrap">
-       <button type="button" > On </button>
-        <button type="button" > Off  </button>
+       <button type="button" onclick="location.href='{% url 'toggle_device' device_name='alarm2' action='on' %}'"> On </button>
+        <button type="button" onclick="location.href='{% url 'toggle_device' device_name='alarm2' action='off' %}'"> Off  </button>
      </div>
   
  </div>
          <div class="buttton-two"> 
             <p>Floodlight1 Control</p>
             <div class=" controls-wrap">
-               <button type="button" > On </button>
-               <button type="button" > Off  </button>
+               <button type="button" onclick="location.href='{% url 'toggle_device' device_name='floodlight1' action='on' %}'"> On </button>
+               <button type="button" onclick="location.href='{% url 'toggle_device' device_name='floodlight1' action='off' %}'"> Off  </button>
             </div> 
         </div>
         <div class="buttton-two"> 
             <p>Floodlight2 Control</p>
             <div class=" controls-wrap">
-               <button type="button" > On </button>
-               <button type="button" > Off  </button>
+               <button type="button" onclick="location.href='{% url 'toggle_device' device_name='floodlight2' action='on' %}'"> On </button>
+               <button type="button" onclick="location.href='{% url 'toggle_device' device_name='floodlight2' action='off' %}'"> Off  </button>
             </div> 
         </div>
     </section>
