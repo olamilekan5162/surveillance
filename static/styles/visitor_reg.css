@@ -23,26 +23,13 @@ h2 {
         font-weight: 900;
          font-style: normal;
         font-size:30px;
-        overflow: hidden;
-        white-space: nowrap;
-        width: 0;
-        animation: typing 3s steps(40, end) forwards;
+       
+       
 }
-@keyframes typing {
-    from { width: 0; }
-    to { width: 100%; }
-  }
+
   
   /* Optional blinking cursor animation (replace with your desired style) */
-  .typed::after {
-    content: "|";
-    animation: blink 0.5s infinite alternate;
-  }
-  
-  @keyframes blink {
-    from, to { opacity: 1; }
-    50% { opacity: 0; }
-  }
+
   
 .input-group {
     margin-bottom: 15px;

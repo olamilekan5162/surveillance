@@ -86,13 +86,13 @@
        
 .video-stream-container{
     padding: 10px;
-    border: 1px solid;
+    
     border-radius:5px;
   height: auto;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
+  justify-content:center !important;
+  align-items:center;
   text-align: center;
 }
 .video-stream-container #image-strem{
@@ -109,7 +109,7 @@
 
         .video-stream, .recordings-section, .past-recordings, 
         .past-recordings, .button-controls-container,
-         .auth-container, .buttton-one, .sms-log, .past-recordings, .buttton-two {
+         .auth-container, .buttton-one, .sms-log, .past-recordings, .image-div, .buttton-two {
             background-color: white; 
             padding:16px;
             margin-bottom: 20px;
@@ -180,6 +180,9 @@
         border-radius: 5px;
         height:300px;
         text-align: center;
+    }
+    .image-div{
+        margin: 12px;
     }
     .sms-log p{
       
@@ -290,8 +293,8 @@
   <div class="video-stream">
       <h1 id="video-header">Video Live stream </h1>
       <div class="video-stream-container" id="video-stream-container">
-     <img src="{% url 'webcam1' %}" width="320" height="240" alt="feeds" class ="image-stream"  >
-     <img src="{% url 'webcam2' %}" width="320" height="240" alt="feeds" class ="image-stream">
+        <div class="image-div"><img src="{% url 'webcam1' %}" width="320" height="240" alt="feeds" class ="image-stream"  ></div>
+        <div class="image-div"><img src="{% url 'webcam2' %}" width="320" height="240" alt="feeds" class ="image-stream"  ></div>
        </div>
     
  </div>
@@ -359,7 +362,7 @@
 </div>
 {% else %}
 <div class="unauthorized">
-    <h1>You are not authorized to view this page</h1>
+    <h1>hljhjklhjhjkhjkhh You are not authorized to view this page</h1>
     <a href="{% url 'index' %}">Back to Homepage</a>
 </div>
 {% endif %}

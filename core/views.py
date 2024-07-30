@@ -9,7 +9,7 @@ import os
 
 # Update the URL with your NVR's stream URL
 camera1 = IpWebCam("rtsp://admin:surveillance123@192.168.1.176:554/Streaming/Channels/101")
-camera2 = IpWebCam("rtsp://admin:surveillance123@192.168.1.176:554/Streaming/Channels/201")
+camera2 = IpWebCam("rtsp://admin:surveillance123@192.168.1.176:554/Streaming/Channels/101")
 
 def index(request):
     return render(request, 'core/index.html')

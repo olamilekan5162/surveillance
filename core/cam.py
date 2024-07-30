@@ -18,35 +18,34 @@ class IpWebCam(object):
         self.fetch_thread = threading.Thread(target=self.update_frame, args=())
         self.fetch_thread.daemon = True
         self.fetch_thread.start()
-        self.start_recording()
+        # self.start_recording()
 
     def __del__(self):
         cv2.destroyAllWindows()
         if self.out is not None:
             self.out.release()
 
-    def start_recording(self):
-        pass
-        # self.is_recording = True
-        # now = datetime.now()
-        # filename = now.strftime("%Y%m%d_%H%M%S") + ".avi"
-        # self.filepath = os.path.join("recordings", filename)
-        # os.makedirs(os.path.dirname(self.filepath), exist_ok=True)
-        # self.out = cv2.VideoWriter(self.filepath, cv2.VideoWriter_fourcc(*'XVID'), 20.0, (320, 240))
-        # self.schedule_stop()
+    # def start_recording(self):
+    #     self.is_recording = True
+    #     now = datetime.now()
+    #     filename = now.strftime("%Y%m%d_%H%M%S") + ".avi"
+    #     self.filepath = os.path.join("recordings", filename)
+    #     os.makedirs(os.path.dirname(self.filepath), exist_ok=True)
+    #     self.out = cv2.VideoWriter(self.filepath, cv2.VideoWriter_fourcc(*'XVID'), 20.0, (320, 240))
+    #     self.schedule_stop()
 
-    def stop_recording(self):
-        pass
-        # self.is_recording = False
-        # if self.out is not None:
-        #     self.out.release()
-        #     self.out = None
-        # recording = Recording(file_path=self.filepath, timestamp=datetime.now())
-        # recording.save()
-        # self.start_recording()
+    # def stop_recording(self):
+    #     self.is_recording = False
+    #     if self.out is not None:
+    #         self.out.release()
+    #         self.out = None
+    #     recording = Recording(file_path=self.filepath, timestamp=datetime.now())
+    #     recording.save()
+    #     self.start_recording()
 
     def update_frame(self):
         cap = cv2.VideoCapture(self.url)
+        cap.set(cv2.CAP_PROP_FPS, 20)
         while True:
             ret, img = cap.read()
             if ret:
@@ -55,6 +54,7 @@ class IpWebCam(object):
             else:
                 cap.release()
                 cap = cv2.VideoCapture(self.url)
+                cap.set(cv2.CAP_PROP_FPS, 20) 
 
     def get_frame(self):
         cap = cv2.VideoCapture(self.url)
@@ -70,6 +70,5 @@ class IpWebCam(object):
         ret, jpeg = cv2.imencode('.jpg', resize)
         return jpeg.tobytes()
     
-    def schedule_stop(self):
-        pass
-        # threading.Timer(21600, self.stop_recording).start()
+    # def schedule_stop(self):
+    #     threading.Timer(60000, self.stop_recording).start()
