@@ -84,17 +84,18 @@
         
        }
        
-.video-stream-container{
+{% comment %} .video-stream-container{
     padding: 10px;
-    
+   width:300px !important;
     border-radius:5px;
   height: auto;
   display: flex;
   flex-direction: row;
-  justify-content:center !important;
-  align-items:center;
+  justify-content: space-between;
+  align-items: center;
   text-align: center;
-}
+ 
+} {% endcomment %}
 .video-stream-container #image-strem{
     display: flex;
     align-items: center;
@@ -107,21 +108,84 @@
     background-color: #d9e2ac;
 }
 
-        .video-stream, .recordings-section, .past-recordings, 
+        .recordings-section, .past-recordings, 
         .past-recordings, .button-controls-container,
-         .auth-container, .buttton-one, .sms-log, .past-recordings, .image-div, .buttton-two {
-            background-color: white; 
+         .auth-container, .buttton-one, .sms-log, .past-recordings,  .buttton-two {
+            background-color: #fffeff; 
             padding:16px;
             margin-bottom: 20px;
             border-radius: 10px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             width:auto !important;
         }
+        .video-stream-container {
+            background-color: white;
+            padding: 30px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: auto !important;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+         
+
+        }
+        
+        .video-viewer {
+            background-color: white;
+            padding: 16px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin: 10px;
+            flex: 1 1 45%; /* Take up about 45% of the container width */
+            box-sizing: border-box;
+            height: 300px;
+        }
+        
+        .camera-div {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            width: 90%;
+        }
+        
+        .image-div {
+            width: 100%;
+            height: 280px;
+        }
+        
+        #video-header {
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .video-viewer h2 {
+            text-align: bottom;
+            margin-top: 10px;
+            font-size: 18px;
+        }
+        
+        /* Media Query for Mobile Devices */
+        @media (max-width: 768px) {
+            .video-viewer {
+                flex: 1 1 100%; /* Take up 100% of the container width on small screens */
+            }
+        
+            .camera-div {
+                flex-direction: column; /* Stack items in a single column on small screens */
+                align-items: center;
+            }
+        }
+
         .button-controls-container{
             display:flex;
             justify-content:center;
             align-items:center;
             flex-direction:row;
+            margin-top: 20px;
           
         }
         .buttton-one{
@@ -162,10 +226,7 @@
 
         }
 
-        #video-header{
-            font-sze: 20px;
-            margin-top:2px !important;
-        }
+
 .recordings-section{
     display:flex;
     flex-direction: row !important;
@@ -180,9 +241,6 @@
         border-radius: 5px;
         height:300px;
         text-align: center;
-    }
-    .image-div{
-        margin: 12px;
     }
     .sms-log p{
       
@@ -207,7 +265,8 @@
         width: 100px;
         margin: 5px;
     }
-        @media (max-width: 364px) {
+    
+        @media (max-width: 760px) {
             .admin-dashboard {
                 flex-direction: column;
             }
@@ -245,12 +304,17 @@
                 padding-left: 12px;
 
             }
-            .button-controls-container{
-                display:flex;
-                justify-content:center;
-                align-items:center;
-                flex-direction:column;
-              
+           
+            .video-stream-container{
+               width:100%;
+               height:auto !important;
+               display:flex;
+               flex-direction:column;
+
+            
+            } 
+            .video-stream-container h2{
+                font-size:18px;
             }
         } 
     </style>
@@ -289,15 +353,29 @@
       </header>
 
 
- {% comment %} video streaming section {% endcomment %}
-  <div class="video-stream">
-      <h1 id="video-header">Video Live stream </h1>
-      <div class="video-stream-container" id="video-stream-container">
-        <div class="image-div"><img src="{% url 'webcam1' %}" width="320" height="240" alt="feeds" class ="image-stream"  ></div>
-        <div class="image-div"><img src="{% url 'webcam2' %}" width="320" height="240" alt="feeds" class ="image-stream"  ></div>
-       </div>
-    
- </div>
+      {% comment %} video streaming section {% endcomment %}
+      <section class="video-stream-container">
+         <h2 id="video-header"> Video live stream </h2>
+         <div class="camera-div">
+             <div class="video-viewer">
+                 <img src="{% url 'webcam1' %}" class="image-div" alt="" />
+                 <h2>Block ten front view</h2>
+             </div>
+             <div class="video-viewer">
+                 <img src="{% url 'webcam2' %}" class="image-div" alt="" />
+                 <h2>Block ten rear view</h2>
+             </div>
+             <div class="video-viewer">
+                 <img src="{% url 'webcam3' %}" class="image-div" alt="" />
+                 <h2>Block ten side view</h2>
+             </div>
+             <div class="video-viewer">
+                 <img src="{% url 'webcam4' %}" class="image-div" alt="" />
+                 <h2>Block ten top view</h2>
+             </div> 
+         </div>
+     </section>
+     
 
  {% comment %} button controls  {% endcomment %}
  <section class=" button-controls-container">
@@ -345,19 +423,58 @@
         </div>
 
 
-        <div class ="past-recordings">
-      <p> Past Recordings and Footages </p> 
-        <select>
-        <option value="true" selected>true</option>
-        <option value="true" selected>true</option>
-        <option value="true" selected>true</option>
-        <option value="true" selected>true</option>
-        <option value="true" selected>true</option>
-          </select>
-
-
-           </div>
+        <div class="past-recordings">
+            <p>Past Recordings and Footages</p>
+            <select id="recording-select">
+                {% for recording in recordings %}
+                    <option value="{% url 'play_recording' recording.id %}">
+                        {{ recording.timestamp }}
+                    </option>
+                {% empty %}
+                    <option value="" disabled>No recordings available</option>
+                {% endfor %}
+            </select>
+        
+            <!-- Playback speed control -->
+            <br><label for="playback-speed">Playback Speed:</label>
+            <select id="playback-speed">
+                <option value="0.5">0.5x</option>
+                <option value="1" selected>1x</option>
+                <option value="1.5">1.5x</option>
+                <option value="2">2x</option>
+            </select>
+        
+            <!-- Hidden video player for streaming -->
+            <video id="video-player" controls style="display: none;">
+                <source id="video-source" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        
+            <script>
+                document.getElementById('recording-select').addEventListener('change', function() {
+                    var selectedUrl = this.value;
+                    var videoPlayer = document.getElementById('video-player');
+                    var videoSource = document.getElementById('video-source');
+        
+                    if (selectedUrl) {
+                        videoSource.src = selectedUrl;
+                        videoPlayer.style.display = 'block';
+                        videoPlayer.load();
+                        videoPlayer.play();
+                    }
+                });
+        
+                // Playback speed control
+                document.getElementById('playback-speed').addEventListener('change', function() {
+                    var videoPlayer = document.getElementById('video-player');
+                    videoPlayer.playbackRate = parseFloat(this.value);
+                });
+            </script>
+        </div>
+        
+        
          </section>
+         
 </div>
 </div>
 {% else %}
