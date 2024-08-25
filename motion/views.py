@@ -5,11 +5,18 @@ from core.views import *
 import requests
 
 # Create your views here.
-ESP32_IP = "http://192.168.228.123"
+ESP32_IP1 = "http://192.168.73.19"
+ESP32_IP2 = "http://192.168.228.123"
+ESP32_IP3 = "http://192.168.228.123"
 
 def toggle_device(request, device_name, action):
     device = DeviceState.objects.get(name=device_name)
-    url = f"{ESP32_IP}/{device.name}/{action}"
+    if device_name == "alarm1":
+        url = f"{ESP32_IP1}/{device.name}/{action}"
+    elif device_name == "alarm2":
+        url = f"{ESP32_IP2}/{device.name}/{action}"
+    elif device_name == "floodlight1" or device_name == "floodlight2":
+        url = f"{ESP32_IP3}/{device.name}/{action}"     
 
     try:
         response = requests.get(url)
